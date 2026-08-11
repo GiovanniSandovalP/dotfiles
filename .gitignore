@@ -1,0 +1,12 @@
+# Archivos temporales de editores (Nano, Vim, VSCode)
+*.swp
+*.swo
+*~
+.vscode/
+
+# Cachés y logs
+*.log
+__pycache__/
+
+# Archivos de respaldo creados por el script
+*.bak
