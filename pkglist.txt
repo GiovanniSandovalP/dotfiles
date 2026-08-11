@@ -26,6 +26,8 @@ linux-headers
 nano
 networkmanager
 nm-connection-editor
+noto-fonts-cjk
+noto-fonts-emoji
 ntfs-3g
 nvidia-open-dkms
 nvidia-settings
