@@ -41,6 +41,8 @@ rofi
 sof-firmware
 sudo
 system-config-printer
+tlp
+tlp-rdw
 ttf-jetbrains-mono-nerd
 wireplumber
 wl-clipboard
