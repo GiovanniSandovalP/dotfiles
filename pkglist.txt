@@ -4,6 +4,7 @@ blueman
 bluez
 bluez-utils
 brightnessctl
+cliphist
 cups
 cups-pk-helper
 dolphin
