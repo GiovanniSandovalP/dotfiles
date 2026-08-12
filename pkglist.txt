@@ -47,6 +47,7 @@ system-config-printer
 tlp
 tlp-rdw
 ttf-jetbrains-mono-nerd
+waybar
 wireplumber
 wl-clipboard
 wpa_supplicant
