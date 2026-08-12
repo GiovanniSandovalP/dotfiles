@@ -16,6 +16,7 @@ github-cli
 grub
 gst-plugin-pipewire
 hyprland
+hyprpaper
 hyprpolkitagent
 intel-ucode
 kitty
@@ -46,6 +47,7 @@ sudo
 system-config-printer
 tlp
 tlp-rdw
+tree
 ttf-jetbrains-mono-nerd
 waybar
 wireplumber
