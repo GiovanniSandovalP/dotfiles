@@ -98,9 +98,19 @@ window#waybar {
 .modules-right > widget > #network label,
 .modules-right > widget > #bluetooth label,
 .modules-right > widget > #custom-power label {
-    padding-right: 6px;
+    padding: 0px;
+    margin: 0px;
+    background-color: red;
 }
 
 .modules-right > widget > #custom-power {
     color: #f38ba8;
+}
+
+/* --- Font Awesome icons --- */
+#network,
+#bluetooth,
+#custom-power {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
 }

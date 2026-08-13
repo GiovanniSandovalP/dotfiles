@@ -55,37 +55,39 @@
 
     "network": {
         "format-wifi": "",
-        "format-ethernet": "󰈀",
-        "format-disconnected": "⚠",
+        "format-ethernet": "",
+        "format-disconnected": "",
         "tooltip-format-wifi": "Network: {essid}\nSignal: {signalStrength}%",
-        "on-click": "nm-connection-editor" // Requires network-manager-applet installed
+        "on-click": "nm-connection-editor"
     },
 
     "bluetooth": {
         "format": "",
-        "format-disabled": "󰂲",
-        "format-connected": "󰂱",
+        "format-disabled": "",
+        "format-connected": "",
+        "format-off": "",
+        "format-on": "",
         "tooltip-format": "{controller_alias}\n{num_connections} connected",
         "tooltip-format-connected": "{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
-        "on-click": "blueman-manager" // Requires blueman installed
+        "on-click": "blueman-manager"
     },
 
     "backlight": {
         "format": "{icon} {percent}%",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "format-icons": ["", "", ""],
         "scroll-step": 5
     },
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "󰝟 {volume}%",
+        "format-muted": " {volume}%",
         "format-icons": {
             "headphone": "",
             "default": ["", "", ""]
         },
         "scroll-step": 5,
-        "on-click": "pavucontrol" // Opens on click
+        "on-click": "pavucontrol"
     },
 
     "battery": {
@@ -102,6 +104,6 @@
     "custom/power": {
         "format": "",
         "tooltip": false,
-        "on-click": "wlogout" // We will install wlogout for the power menu later
+        "on-click": "wlogout"
     }
 }
