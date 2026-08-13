@@ -1,11 +1,14 @@
 alsa-firmware
 base
+base-devel
 blueman
 bluez
 bluez-utils
 brightnessctl
 cliphist
+cmake
 cowsay
+cpio
 cups
 cups-pk-helper
 dolphin

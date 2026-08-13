@@ -1,0 +1,106 @@
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+/* The entire bar is invisible, we only show the modules */
+window#waybar {
+    background-color: transparent;
+}
+
+/* General design for the module ovals/circles */
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+    /* Translucent background (0.5 opacity) dark for contrast */
+    background-color: rgba(15, 15, 23, 0.5);
+    color: #ffffff;
+    
+    padding: 2px 14px;
+    margin: 4px 6px;
+    border-radius: 20px; /* This creates the oval/pill shape */
+
+    /* ========================================================
+       BORDER OPTIONS (Choose one and comment the other)
+       ======================================================== */
+    
+    /* OPTION 1: Solid but transparent border (Active by default) */
+    border: 2px solid rgba(255, 0, 212, 0.4);
+    
+    /* OPTION 2: Neon style border (Uncomment the following 2 lines and comment Option 1 to test it) */
+    /* border: 1px solid rgba(255, 0, 212, 0.7); */
+    /* box-shadow: 0 0 8px rgba(255, 0, 212, 0.8); */
+    
+    /* ======================================================== */
+}
+
+/* --- Specific adjustment for Workspaces (Squares instead of full oval) --- */
+#workspaces {
+    padding: 4px 6px;
+}
+
+#workspaces button {
+    /* Square shape with slightly rounded corners */
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    margin: 0 4px;
+    padding: 0 6px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background-color: rgba(0, 240, 255, 0.3);
+}
+
+#workspaces button.active {
+    background-color: rgba(255, 0, 212, 0.7);
+    color: #ffffff;
+}
+
+/* --- Accent colors for the right side --- */
+#cpu { color: #89b4fa; }
+#memory { color: #f9e2af; }
+#temperature { color: #f38ba8; }
+#network { color: #a6e3a1; }
+#bluetooth { color: #89b4fa; }
+#backlight { color: #f9e2af; }
+#pulseaudio { color: #cba6f7; }
+
+#battery { color: #a6e3a1; }
+#battery.warning { color: #fab387; }
+#battery.critical { color: #f38ba8; }
+
+#custom-power {
+    color: #f38ba8;
+    padding: 2px 16px;
+}
+
+#clock {
+    font-size: 16px; /* Puedes subirlo a 18px o 20px si lo quieres aún más grande */
+    padding: 4px 18px; /* Aumentamos ligeramente el relleno para que el óvalo acompañe el nuevo tamaño */
+}
+
+/* --- Perfect --- */
+.modules-right > widget > #network,
+.modules-right > widget > #bluetooth,
+.modules-right > widget > #custom-power {
+    padding: 0px;
+    margin: 4px 4px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 50%;
+}
+
+.modules-right > widget > #network label,
+.modules-right > widget > #bluetooth label,
+.modules-right > widget > #custom-power label {
+    padding-right: 6px;
+}
+
+.modules-right > widget > #custom-power {
+    color: #f38ba8;
+}
