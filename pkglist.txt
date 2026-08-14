@@ -17,6 +17,7 @@ fastfetch
 firefox
 git
 github-cli
+gobject-introspection
 grub
 gst-plugin-pipewire
 hyprland
@@ -24,6 +25,7 @@ hyprpaper
 hyprpolkitagent
 intel-ucode
 kitty
+less
 libpulse
 linux
 linux-firmware
@@ -38,6 +40,7 @@ nvidia-open-dkms
 nvidia-settings
 nvidia-utils
 os-prober
+otf-font-awesome
 pavucontrol
 pipewire
 pipewire-alsa
@@ -46,6 +49,7 @@ pipewire-pulse
 qt5-wayland
 qt6-wayland
 rofi
+sddm
 sof-firmware
 sudo
 system-config-printer
