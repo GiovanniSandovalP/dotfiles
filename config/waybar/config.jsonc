@@ -6,7 +6,12 @@
     "margin-right": 10,
     "spacing": 0,
 
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": [
+        "custom/desk1",
+        "custom/desk2",
+        "custom/desk3",
+        "custom/desk4"
+    ],
     "modules-center": ["clock"],
     "modules-right": [
         "cpu",
@@ -20,13 +25,29 @@
         "custom/power"
     ],
 
-    // --- LEFT ---
-    "hyprland/workspaces": {
-        "format": "{name}",
-        "on-click": "activate",
-        "disable-scroll": true,
-        "all-outputs": true
+    // --- LEFT (GLOBAL WORKSPACES) ---
+    "custom/desk1": {
+        "format": " 1 ",
+        "on-click": "hyprctl --batch 'dispatch workspace 11; dispatch workspace 1'",
+        "tooltip": false
     },
+    "custom/desk2": {
+        "format": " 2 ",
+        "on-click": "hyprctl --batch 'dispatch workspace 12; dispatch workspace 2'",
+        "tooltip": false
+    },
+    "custom/desk3": {
+        "format": " 3 ",
+        "on-click": "hyprctl --batch 'dispatch workspace 13; dispatch workspace 3'",
+        "tooltip": false
+    },
+    "custom/desk4": {
+        "format": " 4 ",
+        "on-click": "hyprctl --batch 'dispatch workspace 14; dispatch workspace 4'",
+        "tooltip": false
+    },
+
+    // A partir de aquí deja tus otros módulos (clock, cpu, etc.)...
 
     // --- CENTER ---
     "clock": {

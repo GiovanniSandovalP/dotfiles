@@ -1,7 +1,7 @@
 * {
     border: none;
     font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     min-height: 0;
 }
@@ -11,54 +11,52 @@ window#waybar {
     background-color: transparent;
 }
 
-/* General design for the module ovals/circles */
-.modules-left > widget > *,
+/* ========================================================
+   1. DISEÑO DE LA BURBUJA EXTERIOR (Centro y Derecha)
+   ======================================================== */
 .modules-center > widget > *,
 .modules-right > widget > * {
-    /* Translucent background (0.5 opacity) dark for contrast */
     background-color: rgba(15, 15, 23, 0.5);
     color: #ffffff;
-    
     padding: 2px 14px;
     margin: 4px 6px;
-    border-radius: 20px; /* This creates the oval/pill shape */
-
-    /* ========================================================
-       BORDER OPTIONS (Choose one and comment the other)
-       ======================================================== */
-    
-    /* OPTION 1: Solid but transparent border (Active by default) */
+    border-radius: 20px;
     border: 2px solid rgba(255, 0, 212, 0.4);
-    
-    /* OPTION 2: Neon style border (Uncomment the following 2 lines and comment Option 1 to test it) */
-    /* border: 1px solid rgba(255, 0, 212, 0.7); */
-    /* box-shadow: 0 0 8px rgba(255, 0, 212, 0.8); */
-    
-    /* ======================================================== */
 }
 
-/* --- Specific adjustment for Workspaces (Squares instead of full oval) --- */
-#workspaces {
-    padding: 4px 6px;
+/* ========================================================
+   2. DISEÑO DE LA BURBUJA EXTERIOR (Izquierda - Escritorios)
+   Aplicamos la burbuja al contenedor completo para agruparlos
+   ======================================================== */
+.modules-left {
+    background-color: rgba(15, 15, 23, 0.5);
+    border: 2px solid rgba(255, 0, 212, 0.4);
+    border-radius: 20px;
+    margin: 4px 6px;
+    padding: 4px 6px; /* Espacio interno para que los cuadrados no toquen el borde */
 }
 
-#workspaces button {
-    /* Square shape with slightly rounded corners */
+/* ========================================================
+   3. BOTONES CUADRADOS INTERNOS (Tu estilo original)
+   ======================================================== */
+#custom-desk1, 
+#custom-desk2, 
+#custom-desk3, 
+#custom-desk4 {
+    /* Forma cuadrada con bordes ligeramente redondeados */
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    margin: 0 4px;
-    padding: 0 6px;
+    margin: 0 4px; /* Separación entre los botones */
+    padding: 0 8px; /* Relleno interno de cada número */
     transition: all 0.2s ease;
 }
 
-#workspaces button:hover {
+#custom-desk1:hover, 
+#custom-desk2:hover, 
+#custom-desk3:hover, 
+#custom-desk4:hover {
     background-color: rgba(0, 240, 255, 0.3);
-}
-
-#workspaces button.active {
-    background-color: rgba(255, 0, 212, 0.7);
-    color: #ffffff;
 }
 
 /* --- Accent colors for the right side --- */
@@ -80,8 +78,8 @@ window#waybar {
 }
 
 #clock {
-    font-size: 16px; /* Puedes subirlo a 18px o 20px si lo quieres aún más grande */
-    padding: 4px 18px; /* Aumentamos ligeramente el relleno para que el óvalo acompañe el nuevo tamaño */
+    font-size: 16px; 
+    padding: 4px 18px; 
 }
 
 /* --- Perfect --- */
@@ -100,7 +98,7 @@ window#waybar {
 .modules-right > widget > #custom-power label {
     padding: 0px;
     margin: 0px;
-    background-color: red;
+    background-color: transparent; /* Quité el fondo rojo de prueba que tenías aquí */
 }
 
 .modules-right > widget > #custom-power {
@@ -112,5 +110,6 @@ window#waybar {
 #bluetooth,
 #custom-power {
     font-family: "Font Awesome 6 Free";
+    font-size: 15px;
     font-weight: 900;
 }
