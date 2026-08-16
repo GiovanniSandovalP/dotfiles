@@ -51,6 +51,7 @@ pipewire-pulse
 qt5-wayland
 qt6-wayland
 rofi
+rust
 sddm
 sof-firmware
 sudo
