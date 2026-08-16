@@ -1,0 +1,13 @@
+@define-color bubble_bg rgba(46, 52, 64, 0.9);
+@define-color bubble_border #81a1c1;
+@define-color text_main #d8dee9;
+
+@define-color desk_bg rgba(76, 86, 106, 0.4);
+@define-color desk_hover rgba(129, 161, 193, 0.5);
+
+@define-color cpu_color #81a1c1;
+@define-color memory_color #ebcb8b;
+@define-color temp_color #bf616a;
+@define-color net_color #a3be8c;
+@define-color audio_color #5e81ac; /* <-- Nuevo azul oscuro Nord */
+@define-color power_color #bf616a;

@@ -1,1 +1,2 @@
-styles/style.css
+@import "themes/current.css";
+@import "styles/current.css";

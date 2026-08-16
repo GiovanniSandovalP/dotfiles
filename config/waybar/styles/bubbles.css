@@ -1,0 +1,96 @@
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+/* Center and Right Modules */
+.modules-center > widget > *,
+.modules-right > widget > * {
+    background-color: @bubble_bg;
+    color: @text_main;
+    padding: 2px 14px;
+    margin: 4px 4px;
+    border-radius: 20px;
+    border: 2px solid @bubble_border;
+}
+
+/* Left Modules Container */
+.modules-left {
+    background-color: @bubble_bg;
+    border: 2px solid @bubble_border;
+    border-radius: 20px;
+    margin: 4px 6px;
+    padding: 4px 6px;
+}
+
+/* Workspace Buttons */
+#custom-desk1, 
+#custom-desk2, 
+#custom-desk3, 
+#custom-desk4 {
+    border-radius: 6px;
+    background-color: @desk_bg;
+    color: @text_main;
+    margin: 0 4px;
+    padding: 0 8px;
+    transition: all 0.2s ease;
+}
+
+#custom-desk1:hover, 
+#custom-desk2:hover, 
+#custom-desk3:hover, 
+#custom-desk4:hover {
+    background-color: @desk_hover;
+}
+
+/* Dynamic Module Colors */
+#cpu { color: @cpu_color; }
+#memory { color: @memory_color; }
+#temperature { color: @temp_color; }
+#network { color: @net_color; }
+#bluetooth { color: @cpu_color; }
+#backlight { color: @memory_color; }
+#pulseaudio { color: @audio_color; } /* <-- Asignado al volumen */
+#battery { color: @net_color; }
+#battery.critical { color: @temp_color; }
+
+#custom-power { color: @power_color; }
+
+#clock {
+    font-size: 16px; 
+    padding: 4px 18px;
+}
+
+/* Right Circular Buttons */
+.modules-right > widget > #network,
+.modules-right > widget > #bluetooth,
+.modules-right > widget > #custom-power {
+    padding: 0px;
+    margin: 4px 4px;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 50%;
+}
+
+.modules-right > widget > #network label,
+.modules-right > widget > #bluetooth label,
+.modules-right > widget > #custom-power label {
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+}
+
+#network, 
+#bluetooth, 
+#custom-power {
+    font-family: "Font Awesome 6 Free";
+    font-size: 15px;
+    font-weight: 900;
+}
