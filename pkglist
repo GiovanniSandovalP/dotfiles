@@ -23,10 +23,12 @@ gst-plugin-pipewire
 hyprland
 hyprpaper
 hyprpolkitagent
+intel-media-driver
 intel-ucode
 kitty
 less
 libpulse
+libva-nvidia-driver
 linux
 linux-firmware
 linux-headers
