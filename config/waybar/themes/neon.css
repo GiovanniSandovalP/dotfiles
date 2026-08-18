@@ -1,0 +1,19 @@
+
+@define-color bubble_bg rgba(8, 12, 38, 0.92);
+@define-color bubble_border #a855f7;
+@define-color text_main #e0e7ff;
+
+@define-color desk_bg rgba(15, 23, 55, 0.72);
+@define-color desk_hover rgba(124, 58, 237, 0.55);
+
+@define-color cpu_color #38bdf8;
+@define-color memory_color #818cf8;
+@define-color temp_color #c084fc;
+@define-color net_color #22d3ee;
+@define-color audio_color #60a5fa;
+@define-color power_color #e879f9;
+
+@define-color purple #a855f7;
+@define-color purple_bright #c084fc;
+@define-color blue #38bdf8;
+@define-color blue_bright #22d3ee;
