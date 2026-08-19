@@ -1,6 +1,4 @@
-
-# Rofi visual overrides
-ROFI_OVERRIDES="window {location: northeast; anchor: northeast; y-offset: 45px; x-offset: -15px; width: 350px;} listview {lines: 6;}"
+#!/bin/bash
 
 # Background rescan to update cache silently
 nmcli dev wifi rescan >/dev/null 2>&1 &
@@ -27,7 +25,7 @@ else
     FULL_LIST="$WIFI_LIST"
 fi
 
-CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | rofi -dmenu -i -p "  Network" -theme-str "$ROFI_OVERRIDES")
+CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | rofi -dmenu -i -p "  Network" -theme ~/.config/rofi/network-menu.rasi)
 
 if [ -z "$CHOSEN_NETWORK" ]; then
     exit 0
@@ -52,7 +50,7 @@ else
     if [ -z "$SEC_TYPE" ] || [ "$SEC_TYPE" = "--" ]; then
         nmcli dev wifi connect "$CHOSEN_NETWORK" >/dev/null 2>&1
     else
-        PASSWORD=$(rofi -dmenu -p " Password for $CHOSEN_NETWORK" -theme-str "$ROFI_OVERRIDES" -password)
+        PASSWORD=$(rofi -dmenu -p " Password for $CHOSEN_NETWORK" -theme ~/.config/rofi/network-menu.rasi -password)
         if [ -n "$PASSWORD" ]; then
             nmcli dev wifi connect "$CHOSEN_NETWORK" password "$PASSWORD" >/dev/null 2>&1
         fi
