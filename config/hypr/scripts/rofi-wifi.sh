@@ -35,41 +35,27 @@ if [ -z "$CHOSEN_NETWORK" ]; then
 fi
 
 if [[ "$CHOSEN_NETWORK" == \[Ethernet\]* ]]; then
-    CLEAN_ETH_NAME="${CHOSEN_NETWORK#[Ethernet] }"
-    notify-send "Network" "Ethernet is already active: $CLEAN_ETH_NAME"
     exit 0
 fi
 
 if [[ "$CHOSEN_NETWORK" == \[Connected\]* ]]; then
-    CLEAN_WIFI_NAME="${CHOSEN_NETWORK#[Connected] }"
-    notify-send "Wi-Fi" "Disconnecting from $CLEAN_WIFI_NAME..."
-    
     WIFI_IFACE=$(nmcli -t -f DEVICE,TYPE dev | awk -F: '$2=="wifi" {print $1}' | head -n 1)
-    
-    if nmcli dev disconnect "$WIFI_IFACE" >/dev/null 2>&1; then
-        notify-send "Wi-Fi" "Disconnected from $CLEAN_WIFI_NAME"
-    else
-        notify-send "Wi-Fi" "Failed to disconnect"
-    fi
+    nmcli dev disconnect "$WIFI_IFACE" >/dev/null 2>&1
     exit 0
 fi
 
 if nmcli -t -f NAME connection show | grep -Fxq "$CHOSEN_NETWORK"; then
-    notify-send "Wi-Fi" "Connecting to $CHOSEN_NETWORK..."
-    if nmcli connection up "$CHOSEN_NETWORK" >/dev/null 2>&1; then
-        notify-send "Wi-Fi" "Connected to $CHOSEN_NETWORK"
-    else
-        notify-send "Wi-Fi" "Failed to connect"
-    fi
+    nmcli connection up "$CHOSEN_NETWORK" >/dev/null 2>&1
 else
-    PASSWORD=$(rofi -dmenu -p " Password for $CHOSEN_NETWORK" -theme-str "$ROFI_OVERRIDES" -password)
-    
-    if [ -n "$PASSWORD" ]; then
-        notify-send "Wi-Fi" "Connecting to $CHOSEN_NETWORK..."
-        if nmcli dev wifi connect "$CHOSEN_NETWORK" password "$PASSWORD" >/dev/null 2>&1; then
-            notify-send "Wi-Fi" "Connected to $CHOSEN_NETWORK"
-        else
-            notify-send "Wi-Fi" "Incorrect password or connection failed"
+    # Check security type for selected network
+    SEC_TYPE=$(nmcli -t -f SECURITY,SSID dev wifi list --rescan no | awk -F: -v target="$CHOSEN_NETWORK" '$2==target {print $1}' | head -n 1)
+
+    if [ -z "$SEC_TYPE" ] || [ "$SEC_TYPE" = "--" ]; then
+        nmcli dev wifi connect "$CHOSEN_NETWORK" >/dev/null 2>&1
+    else
+        PASSWORD=$(rofi -dmenu -p " Password for $CHOSEN_NETWORK" -theme-str "$ROFI_OVERRIDES" -password)
+        if [ -n "$PASSWORD" ]; then
+            nmcli dev wifi connect "$CHOSEN_NETWORK" password "$PASSWORD" >/dev/null 2>&1
         fi
     fi
 fi
