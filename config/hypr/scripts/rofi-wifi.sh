@@ -7,36 +7,63 @@ notify-send "Network" "Scanning networks..." -t 2000
 # Hide errors if rescan is called too frequently
 nmcli dev wifi rescan >/dev/null 2>&1 || true
 
-# Get active Ethernet connections
+# 1. Get active Ethernet connections
 ETH_CONNS=$(nmcli -t -f NAME,TYPE con show --active | awk -F: '/ethernet/ {print "[Ethernet] " $1}')
 
-# Get unique Wi-Fi SSIDs, excluding empty lines
-WIFI_LIST=$(nmcli -t -f SSID dev wifi | grep -v '^$' | sort -u)
+# 2. Get active Wi-Fi SSID
+ACTIVE_SSID=$(nmcli -t -f IN-USE,SSID dev wifi | awk -F: '/^\*/ {print $2}' | head -n 1)
 
-# Combine lists
+# 3. Get all other Wi-Fi networks (excluding the active one to avoid duplicates)
+if [ -n "$ACTIVE_SSID" ]; then
+    WIFI_LIST=$(nmcli -t -f SSID dev wifi | grep -v '^\s*$' | grep -vxF "$ACTIVE_SSID" | sort -u)
+    # Add the active one at the top with a tag
+    WIFI_LIST="[Connected] $ACTIVE_SSID\n$WIFI_LIST"
+else
+    WIFI_LIST=$(nmcli -t -f SSID dev wifi | grep -v '^\s*$' | sort -u)
+fi
+
+# 4. Combine Ethernet and Wi-Fi lists
 if [ -n "$ETH_CONNS" ]; then
     FULL_LIST="$ETH_CONNS\n$WIFI_LIST"
 else
     FULL_LIST="$WIFI_LIST"
 fi
 
-# Display menu
+# 5. Display menu in Rofi
 CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | rofi -dmenu -i -p "  Network" -theme-str "$ROFI_OVERRIDES")
 
-# Exit if no network is selected (e.g., user pressed Esc)
+# Exit if no network is selected
 if [ -z "$CHOSEN_NETWORK" ]; then
     exit 0
 fi
 
-# Handle Ethernet selection (just notify, as it's already connected)
+# --- LOGIC HANDLING ---
+
+# Handle Ethernet selection
 if [[ "$CHOSEN_NETWORK" == \[Ethernet\]* ]]; then
     CLEAN_ETH_NAME="${CHOSEN_NETWORK#[Ethernet] }"
     notify-send "Network" "Ethernet is already active: $CLEAN_ETH_NAME"
     exit 0
 fi
 
-# Handle Wi-Fi connection
-# Check if the network is already a saved connection
+# Handle Wi-Fi DISCONNECT (If user clicks the currently connected network)
+if [[ "$CHOSEN_NETWORK" == \[Connected\]* ]]; then
+    CLEAN_WIFI_NAME="${CHOSEN_NETWORK#[Connected] }"
+    notify-send "Wi-Fi" "Disconnecting from $CLEAN_WIFI_NAME..."
+    
+    # Get the active Wi-Fi interface (usually wlan0)
+    WIFI_IFACE=$(nmcli -t -f DEVICE,TYPE dev | awk -F: '$2=="wifi" {print $1}' | head -n 1)
+    
+    # Disconnect the interface directly (100% reliable regardless of connection name)
+    if nmcli dev disconnect "$WIFI_IFACE" >/dev/null 2>&1; then
+        notify-send "Wi-Fi" "Disconnected from $CLEAN_WIFI_NAME"
+    else
+        notify-send "Wi-Fi" "Failed to disconnect"
+    fi
+    exit 0
+fi
+
+# Handle Wi-Fi CONNECT (New or saved networks)
 if nmcli -t -f NAME connection show | grep -Fxq "$CHOSEN_NETWORK"; then
     notify-send "Wi-Fi" "Connecting to $CHOSEN_NETWORK..."
     if nmcli connection up "$CHOSEN_NETWORK" >/dev/null 2>&1; then
