@@ -79,7 +79,7 @@
         "format-ethernet": "",
         "format-disconnected": "",
         "tooltip-format-wifi": "Network: {essid}\nSignal: {signalStrength}%",
-        "on-click": "nm-connection-editor"
+        "on-click": "~/.config/hypr/scripts/rofi-wifi.sh"
     },
 
     "bluetooth": {
