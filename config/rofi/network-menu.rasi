@@ -1,0 +1,13 @@
+@import "default"
+
+window {
+    location: northeast;
+    anchor: northeast;
+    x-offset: -15px;
+    y-offset: 45px;
+    width: 350px;
+}
+
+listview {
+    lines: 6;
+}

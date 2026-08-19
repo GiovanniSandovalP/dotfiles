@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # Rofi visual overrides
 ROFI_OVERRIDES="window {location: northeast; anchor: northeast; y-offset: 45px; x-offset: -15px; width: 350px;} listview {lines: 6;}"
