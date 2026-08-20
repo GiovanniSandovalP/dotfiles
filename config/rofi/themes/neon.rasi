@@ -1,0 +1,16 @@
+* {
+    bg:          rgba(8, 12, 38, 0.92);
+    bg-alt:      rgba(15, 23, 55, 0.75);
+    fg:          #e0e7ff;
+    border-col:  #a855f7;
+    accent:      #38bdf8;
+    bright:      #c084fc;
+    net:         #22d3ee;
+
+    element-bg: #181c2e;
+    selected-bg: #0284c7;
+    selected-fg: #ffffff;
+
+    background-color: transparent;
+    text-color:       @fg;
+}

@@ -1,4 +1,5 @@
 @import "default"
+@import "current.rasi"
 
 window {
     location: northeast;
@@ -6,8 +7,36 @@ window {
     x-offset: -15px;
     y-offset: 45px;
     width: 350px;
+
+    background-color: @bg;
+    border: 2px;
+    border-color: @border-col;
+    border-radius: 12px;
 }
 
 listview {
     lines: 6;
+    padding: 8px;
+    spacing: 6px;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+}
+
+element normal.normal, element alternate.normal {
+    background-color: @element-bg;
+    text-color: @fg;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+element selected.normal {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+    border: 1px;
+    border-color: @bright;
+    padding: 8px 12px;
+    border-radius: 8px;
 }
