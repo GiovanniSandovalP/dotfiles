@@ -1,5 +1,5 @@
 @import "default"
-@import "current.rasi"
+@import "themes/current.rasi"
 
 window {
     location: northeast;
