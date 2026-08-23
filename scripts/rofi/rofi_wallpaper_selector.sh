@@ -6,9 +6,11 @@ THEME_MANAGER="$HOME/.scripts/theme/theme_manager.sh"
 
 [ ! -d "$WALL_DIR" ] && exit 1
 
-SELECTED=$(find "$WALL_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.webp" \) | sort | while read -r img; do
-    echo -e "$(basename "$img")\0icon\x1f${img}"
-done | rofi -dmenu -i -p "Wallpaper" -theme "$ROFI_THEME")
+# Generate the list of images and FORCE icons in Rofi
+SELECTED=$(for img in "$WALL_DIR"/*.{jpg,jpeg,png,webp}; do
+    [ -f "$img" ] || continue
+    echo -en "$(basename "$img")\0icon\x1f${img}\n"
+done | rofi -dmenu -i -show-icons -p "Wallpaper" -theme "$ROFI_THEME")
 
 if [ -n "$SELECTED" ]; then
     # Extract the path name
