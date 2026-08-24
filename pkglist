@@ -33,6 +33,7 @@ linux
 linux-firmware
 linux-headers
 nano
+network-manager-applet
 networkmanager
 nm-connection-editor
 noto-fonts-cjk
