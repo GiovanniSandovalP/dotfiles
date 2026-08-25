@@ -1,0 +1,61 @@
+configuration {
+    font: "JetBrainsMono Nerd Font 12";
+    disable-history: true;
+}
+
+* {
+    /* Color definitions */
+    bg-color: rgba(20, 20, 20, 0.75);
+    text-base: #ffffff;
+    accent: #89b4fa;
+    accent-text: #11111b;
+    
+    background-color: transparent;
+}
+
+window {
+    width: 350px;
+    background-color: @bg-color;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+mainbox {
+    spacing: 12px;
+    /* Removed 'entry' to hide the search bar */
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    children: [ prompt ];
+    padding: 4px;
+}
+
+prompt {
+    text-color: @accent;
+    font: "JetBrainsMono Nerd Font Bold 12";
+}
+
+listview {
+    lines: 3;
+    spacing: 6px;
+    layout: vertical;
+}
+
+element {
+    padding: 10px;
+    border-radius: 6px;
+    text-color: @text-base;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: @accent-text;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
