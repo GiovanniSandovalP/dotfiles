@@ -1,3 +1,5 @@
+
+
 configuration {
     font: "JetBrainsMono Nerd Font 12";
     disable-history: true;
@@ -23,19 +25,9 @@ window {
 }
 
 mainbox {
-    spacing: 12px;
-    /* Removed 'entry' to hide the search bar */
-    children: [ inputbar, listview ];
-}
-
-inputbar {
-    children: [ prompt ];
-    padding: 4px;
-}
-
-prompt {
-    text-color: @accent;
-    font: "JetBrainsMono Nerd Font Bold 12";
+    spacing: 0px;
+    /* Dejamos solo la lista de opciones, eliminamos el inputbar */
+    children: [ listview ];
 }
 
 listview {
