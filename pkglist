@@ -22,7 +22,9 @@ grub
 gst-plugin-pipewire
 hyprland
 hyprpaper
+hyprpicker
 hyprpolkitagent
+hyprshot
 intel-media-driver
 intel-ucode
 kitty
@@ -53,6 +55,7 @@ qt5-wayland
 qt6-wayland
 rofi
 rust
+satty
 sddm
 sof-firmware
 sudo
