@@ -9,7 +9,7 @@ configuration {
 window {
     location: center;
     anchor: center;
-    width: 90%;
+    width: 1610px;
     
     background-color: @bg;
     border: 2px;
@@ -38,6 +38,7 @@ listview {
 
 element {
     orientation: vertical;
+    width: 300px;
     padding: 0px;
     margin: 0px;
     spacing: 0px;
