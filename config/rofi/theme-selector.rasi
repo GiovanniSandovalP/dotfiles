@@ -42,18 +42,12 @@ element {
     margin: 0px;
     spacing: 0px;
     border-radius: 12px;
-    width: 300px;
 }
 
 element-icon {
     background-color: transparent;
     size: 300px;
-    width: 300px;
-    height: 170px;
-    horizontal-align: 0.5;
-    vertical-align: 0.5;
-    margin: 0px;
-    padding: 0px;
+    margin: -65px 0px -65px 0px;
     border-radius: 12px 12px 0px 0px;
 }
 
