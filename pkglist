@@ -46,8 +46,6 @@ nvidia-settings
 nvidia-utils
 os-prober
 otf-font-awesome
-paru
-paru-debug
 pavucontrol
 pipewire
 pipewire-alsa
@@ -67,10 +65,8 @@ tlp-rdw
 tree
 ttf-jetbrains-mono-nerd
 waybar
-waypaper
 wireplumber
 wl-clipboard
-wlogout
 wpa_supplicant
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
