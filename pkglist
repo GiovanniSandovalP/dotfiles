@@ -34,6 +34,7 @@ libva-nvidia-driver
 linux
 linux-firmware
 linux-headers
+mpv
 nano
 network-manager-applet
 networkmanager
