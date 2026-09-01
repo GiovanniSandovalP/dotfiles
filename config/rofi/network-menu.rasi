@@ -14,6 +14,39 @@ window {
     border-radius: 12px;
 }
 
+mainbox {
+    background-color: transparent;
+    spacing: 10px;
+    padding: 12px; /* Margen interno general de la ventana */
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    background-color: transparent;
+    spacing: 8px;
+    padding: 0px;
+    children: [ "prompt", "entry" ];
+}
+
+prompt {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font: "bold";
+}
+
+entry {
+    background-color: @element-bg;
+    text-color: @fg;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: text;
+    placeholder: "Buscar red...";
+    placeholder-color: @fg; /* Cambia a una variable de gris oscuro si tienes una en tu tema */
+    vertical-align: 0.5;
+}
+
 listview {
     lines: 6;
     padding: 8px;
