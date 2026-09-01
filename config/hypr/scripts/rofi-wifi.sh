@@ -50,16 +50,58 @@ done <<< "$WIFI_CLEAN"
 
 FULL_LIST=$(echo -e "$FULL_LIST" | sed '/^$/d')
 
-# Launch Rofi (highlighting the active network if any)
+# --- ROFI COMMAND EXECUTION ---
+# Added alt+x for manual disconnect
+ROFI_CMD="rofi -dmenu -i -p \"  Network\" -theme ~/.config/rofi/network-menu.rasi \
+-mesg \"󰌌 [Enter] Conn/Disc  |  [Alt+D] Forget  |  [Alt+X] Disconnect  |  [Alt+I] Info\" \
+-kb-custom-1 alt+d -kb-custom-2 alt+i -kb-custom-3 alt+x"
+
 if [ $ACTIVE_INDEX -ge 0 ]; then
-    CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | rofi -dmenu -i -p "  Network" -theme ~/.config/rofi/network-menu.rasi -a "$ACTIVE_INDEX")
+    CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | eval $ROFI_CMD -a "$ACTIVE_INDEX")
 else
-    CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | rofi -dmenu -i -p "  Network" -theme ~/.config/rofi/network-menu.rasi)
+    CHOSEN_NETWORK=$(echo -e "$FULL_LIST" | eval $ROFI_CMD)
 fi
 
-[ -z "$CHOSEN_NETWORK" ] && exit 0
+ROFI_EXIT=$?
 
-# --- Selection Logic ---
+# If user pressed Escape (exit code 1) or nothing was selected
+if [ $ROFI_EXIT -eq 1 ] || [ -z "$CHOSEN_NETWORK" ]; then
+    exit 0
+fi
+
+# Extract clean SSID immediately
+TARGET_SSID=$(echo "$CHOSEN_NETWORK" | sed -e "s/^ *//g" -e "s/^$ICON_WIFI //" -e "s/^$ICON_CHECK //" -e "s/ $ICON_LOCK$//" -e "s/ $ICON_UNLOCK$//")
+
+# --- CUSTOM KEYBINDING LOGIC ---
+
+# Action: Forget Network (Alt + D)
+if [ $ROFI_EXIT -eq 10 ]; then
+    if nmcli -t -f NAME connection show | grep -Fxq "$TARGET_SSID"; then
+        nmcli connection delete "$TARGET_SSID" >/dev/null 2>&1
+    fi
+    exec "$0" # Reload script
+fi
+
+# Action: Show Info (Alt + I)
+if [ $ROFI_EXIT -eq 11 ]; then
+    INFO_IP=$(nmcli -g IP4.ADDRESS connection show "$TARGET_SSID" 2>/dev/null | head -n 1)
+    [ -z "$INFO_IP" ] && INFO_IP="Not active or no IP"
+    INFO_GW=$(nmcli -g IP4.GATEWAY connection show "$TARGET_SSID" 2>/dev/null | head -n 1)
+    [ -z "$INFO_GW" ] && INFO_GW="Not active"
+    
+    # Use dmenu instead of rofi -e to ensure compatibility with your theme
+    echo -e "SSID: $TARGET_SSID\nIP Address: $INFO_IP\nGateway: $INFO_GW" | rofi -dmenu -p " Info" -theme ~/.config/rofi/network-menu.rasi
+    exec "$0" # Reload script after viewing info
+fi
+
+# Action: Explicit Disconnect (Alt + X)
+if [ $ROFI_EXIT -eq 12 ]; then
+    WIFI_IFACE=$(nmcli -t -f DEVICE,TYPE dev | awk -F: '$2=="wifi" {print $1}' | head -n 1)
+    nmcli dev disconnect "$WIFI_IFACE" >/dev/null 2>&1
+    exec "$0" # Reload script
+fi
+
+# --- NORMAL SELECTION LOGIC (Enter / Click - Exit Code 0) ---
 
 if [[ "$CHOSEN_NETWORK" == *"$ICON_SCAN"* ]]; then
     nmcli dev wifi rescan
@@ -70,29 +112,23 @@ if [[ "$CHOSEN_NETWORK" == *"$ICON_ETH"* ]]; then
     exit 0
 fi
 
-# Disconnect current network
+# Disconnect current network via Enter key
 if [[ "$CHOSEN_NETWORK" == *"$ICON_CHECK"* ]]; then
     WIFI_IFACE=$(nmcli -t -f DEVICE,TYPE dev | awk -F: '$2=="wifi" {print $1}' | head -n 1)
     nmcli dev disconnect "$WIFI_IFACE" >/dev/null 2>&1
     exit 0
 fi
 
-# Extract clean SSID
-TARGET_SSID=$(echo "$CHOSEN_NETWORK" | sed -e "s/^ *//g" -e "s/^$ICON_WIFI //" -e "s/^$ICON_CHECK //" -e "s/ $ICON_LOCK$//" -e "s/ $ICON_UNLOCK$//")
-
+# Connect Logic
 if nmcli -t -f NAME connection show | grep -Fxq "$TARGET_SSID"; then
-    # Known network
     nmcli connection up "$TARGET_SSID" >/dev/null 2>&1
 else
-    # New network, check for password based on lock icon
     if [[ "$CHOSEN_NETWORK" == *"$ICON_LOCK"* ]]; then
-        # --- FIX: Agregamos 'inputbar { orientation: vertical; }' para apilar título y caja de texto ---
         PASSWORD=$(echo "" | rofi -dmenu -p " Password for $TARGET_SSID" -theme ~/.config/rofi/network-menu.rasi -password -theme-str 'listview {enabled: false;} inputbar {orientation: vertical;}')
         if [ -n "$PASSWORD" ]; then
             nmcli dev wifi connect "$TARGET_SSID" password "$PASSWORD" >/dev/null 2>&1
         fi
     else
-        # Public network
         nmcli dev wifi connect "$TARGET_SSID" >/dev/null 2>&1
     fi
 fi
