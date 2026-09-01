@@ -6,7 +6,7 @@ window {
     anchor: northeast;
     x-offset: -15px;
     y-offset: 45px;
-    width: 350px;
+    width: 450px;
 
     background-color: @bg;
     border: 2px;
@@ -17,7 +17,7 @@ window {
 mainbox {
     background-color: transparent;
     spacing: 10px;
-    padding: 12px; /* Margen interno general de la ventana */
+    padding: 12px;
     children: [ "inputbar", "listview" ];
 }
 
@@ -42,8 +42,8 @@ entry {
     padding: 8px 12px;
     border-radius: 8px;
     cursor: text;
-    placeholder: "Buscar red...";
-    placeholder-color: @fg; /* Cambia a una variable de gris oscuro si tienes una en tu tema */
+    placeholder: "Search network...";
+    placeholder-color: @fg;
     vertical-align: 0.5;
 }
 
