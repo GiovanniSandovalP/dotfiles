@@ -9,7 +9,9 @@ configuration {
 window {
     width: 800px;
     border-radius: 15px;
-    background-color: @background;
+    border: 2px;
+    border-color: @border-col;
+    background-color: @bg;
 }
 
 mainbox {
@@ -26,16 +28,16 @@ inputbar {
 prompt {
     font: "sans-serif bold 14";
     background-color: transparent;
-    text-color: @background;
+    text-color: @bg;
     margin: 0px 10px 0px 0px;
 }
 
 entry {
     font: "sans-serif 14";
     background-color: transparent;
-    text-color: @background;
+    text-color: @bg;
     placeholder: "Search...";
-    placeholder-color: @background;
+    placeholder-color: @bg;
 }
 
 listview {
@@ -63,14 +65,14 @@ element-icon {
 element-text {
     horizontal-align: 0.5;
     margin: 10px 0px 0px 0px;
-    text-color: @foreground;
+    text-color: @fg;
     background-color: transparent;
 }
 
 element selected {
-    background-color: @selected-background;
+    background-color: @selected-bg;
 }
 
 element-text selected {
-    text-color: @selected-foreground;
+    text-color: @selected-fg;
 }
