@@ -1,0 +1,76 @@
+@import "themes/current.rasi"
+
+configuration {
+    show-icons: true;
+    display-drun: "";
+    drun-display-format: "{name}";
+}
+
+window {
+    width: 800px;
+    border-radius: 15px;
+    background-color: @background;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    padding: 25px 20px;
+    background-color: @accent;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    font: "sans-serif bold 14";
+    background-color: transparent;
+    text-color: @background;
+    margin: 0px 10px 0px 0px;
+}
+
+entry {
+    font: "sans-serif 14";
+    background-color: transparent;
+    text-color: @background;
+    placeholder: "Search...";
+    placeholder-color: @background;
+}
+
+listview {
+    padding: 25px;
+    columns: 5;
+    lines: 3;
+    spacing: 15px;
+    background-color: transparent;
+    layout: vertical;
+}
+
+element {
+    orientation: vertical;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: transparent;
+}
+
+element-icon {
+    size: 54px;
+    horizontal-align: 0.5;
+    background-color: transparent;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    margin: 10px 0px 0px 0px;
+    text-color: @foreground;
+    background-color: transparent;
+}
+
+element selected {
+    background-color: @selected-background;
+}
+
+element-text selected {
+    text-color: @selected-foreground;
+}
